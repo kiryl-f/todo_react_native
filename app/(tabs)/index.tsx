@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { IconButton, Checkbox } from 'react-native-paper'; // Or any icon/checkbox library
+import { IconButton, Checkbox } from 'react-native-paper'; 
 import { router, useNavigation } from 'expo-router';
 
 const tasks = [
@@ -15,7 +15,7 @@ export default function TaskList() {
     <View style={{ flex: 1, padding: 16 }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>My Tasks</Text>
-        <IconButton icon="magnify" onPress={() => { /* Handle search */ }} />
+        <IconButton icon="magnify" onPress={() => {  }} />
       </View>
       
       
@@ -46,7 +46,7 @@ export default function TaskList() {
           borderRadius: 50,
           padding: 16,
         }}
-        onPress={() => router.push('/add_task')}
+        onPress={() => router.push('../add_task')}
       >
         <Text style={{ color: '#fff', fontSize: 24 }}>+</Text>
       </TouchableOpacity>

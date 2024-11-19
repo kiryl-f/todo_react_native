@@ -18,6 +18,10 @@ export default function TaskFormScreen() {
   const [tags, setTags] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({headerShown: false});
+  }, [navigation]);
+  
   const handleSaveTask = () => {
     console.log({ taskTitle, description, dueDate, priority, tags });
     navigation.goBack();
