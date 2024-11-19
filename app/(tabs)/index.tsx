@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, FlatList, TouchableOpacity, Keyboard } from 'react-native';
 import { IconButton, Checkbox } from 'react-native-paper'; 
 import { router, useNavigation } from 'expo-router';
 
@@ -13,13 +13,25 @@ export default function TaskList() {
   const [searchText, setSearchText] = useState('');
   const [isSearchActive, setIsSearchActive] = useState(false);
 
+  useEffect(() => {
+    const keyboardListener = Keyboard.addListener('keyboardDidHide', () => {
+      if (isSearchActive) {
+        setIsSearchActive(false);
+        setSearchText('');
+      }
+    });
+
+    return () => {
+      keyboardListener.remove();
+    };
+  }, [isSearchActive]);
+
   const filteredTasks = tasks.filter(task => 
     task.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
     <View style={{ flex: 1, padding: 16, marginTop: 25 }}>
-      {/* Toolbar */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         {isSearchActive ? (
           <TextInput
@@ -44,6 +56,7 @@ export default function TaskList() {
           onPress={() => {
             if (isSearchActive) {
               setSearchText('');
+              Keyboard.dismiss();
             }
             setIsSearchActive(!isSearchActive);
           }} 
