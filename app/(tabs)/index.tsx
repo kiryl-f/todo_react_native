@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { IconButton, Checkbox } from 'react-native-paper'; 
 import { router, useNavigation } from 'expo-router';
 
@@ -10,17 +10,48 @@ const tasks = [
 ];
 
 export default function TaskList() {
+  const [searchText, setSearchText] = useState('');
+  const [isSearchActive, setIsSearchActive] = useState(false);
+
+  const filteredTasks = tasks.filter(task => 
+    task.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
+    <View style={{ flex: 1, padding: 16, marginTop: 25 }}>
+      {/* Toolbar */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>My Tasks</Text>
-        <IconButton icon="magnify" onPress={() => {  }} />
+        {isSearchActive ? (
+          <TextInput
+            placeholder="Search tasks..."
+            value={searchText}
+            onChangeText={setSearchText}
+            autoFocus={true}
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              borderRadius: 8,
+              padding: 8,
+              marginRight: 8,
+            }}
+          />
+        ) : (
+          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>My Tasks</Text>
+        )}
+        <IconButton 
+          icon={isSearchActive ? "close" : "magnify"} 
+          onPress={() => {
+            if (isSearchActive) {
+              setSearchText('');
+            }
+            setIsSearchActive(!isSearchActive);
+          }} 
+        />
       </View>
-      
-      
+
       <FlatList
-        data={tasks}
+        data={filteredTasks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8 }}>
@@ -32,7 +63,7 @@ export default function TaskList() {
               <Text style={{ fontSize: 16 }}>{item.name}</Text>
               <Text style={{ color: 'gray' }}>Due: {item.dueDate}</Text>
             </View>
-            <IconButton icon="dots-vertical" onPress={() => {  }} />
+            <IconButton icon="dots-vertical" onPress={() => { }} />
           </View>
         )}
       />

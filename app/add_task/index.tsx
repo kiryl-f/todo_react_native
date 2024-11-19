@@ -21,7 +21,7 @@ export default function TaskFormScreen() {
   React.useLayoutEffect(() => {
     navigation.setOptions({headerShown: false});
   }, [navigation]);
-  
+
   const handleSaveTask = () => {
     console.log({ taskTitle, description, dueDate, priority, tags });
     navigation.goBack();
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    marginTop: 25,
     backgroundColor: '#f8f9fa',
   },
   header: {
