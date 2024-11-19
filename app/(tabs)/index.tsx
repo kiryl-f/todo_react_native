@@ -86,13 +86,17 @@ export default function TaskList() {
           position: 'absolute',
           bottom: 16,
           right: 16,
+          width: 48, 
+          height: 48,
           backgroundColor: '#000',
           borderRadius: 50,
-          padding: 16,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
         onPress={() => router.push('../add_task')}
       >
-        <Text style={{ color: '#fff', fontSize: 24 }}>+</Text>
+        <Text style={{ color: '#fff', fontSize: 36 }}>+</Text>
       </TouchableOpacity>
     </View>
   );

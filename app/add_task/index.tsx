@@ -40,7 +40,7 @@ export default function TaskFormScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>TaskTide</Text>
+      <Text style={styles.header}>Add task</Text>
 
       <Text style={styles.label}>Task Title</Text>
       <TextInput
@@ -80,7 +80,6 @@ export default function TaskFormScreen() {
         style={styles.input}
         value={priority}
         editable={false}
-        // Add dropdown logic for priority if needed
       />
 
       <Text style={styles.label}>Tags</Text>
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   label: {
     fontSize: 16,
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   cancelButton: {
-    backgroundColor: '#e9ecef',
+    backgroundColor: '#ff0000',
     borderRadius: 4,
     padding: 10,
     flex: 1,
